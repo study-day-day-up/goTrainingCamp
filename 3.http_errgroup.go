@@ -109,11 +109,10 @@ func HandelRequest(ctx context.Context) error {
 		select {
 		case <-ctx.Done():
 			fmt.Println("HttpServe cancel")
+			return nil
 		default:
-			if err := server.ListenAndServe(); err != nil {
-				return err
-			}
 			fmt.Println("HttpServe start up")
+			return server.ListenAndServe()
 		}
 	}
 }
