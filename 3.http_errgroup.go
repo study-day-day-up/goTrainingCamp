@@ -105,15 +105,13 @@ func HandelRequest(ctx context.Context) error {
 		Handler: mux,
 	}
 
-	for {
-		select {
-		case <-ctx.Done():
-			fmt.Println("HttpServe cancel")
-			return nil
-		default:
-			fmt.Println("HttpServe start up")
-			return server.ListenAndServe()
-		}
+	select {
+	case <-ctx.Done():
+		fmt.Println("HttpServe cancel")
+		return nil
+	default:
+		fmt.Println("HttpServe start up")
+		return server.ListenAndServe()
 	}
 }
 
